@@ -20,9 +20,15 @@ export const Login = () => {
     password: "",
   });
   const [OTP, setOTP] = useState("");
+
+  /****************************** Function to set OTP **************** */
+
   function handleChanges(OTP) {
     setOTP(OTP);
   }
+
+  /********************** function to set Input Values ****************************** */
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormvalues((prev) => {
@@ -32,6 +38,9 @@ export const Login = () => {
       };
     });
   };
+
+  /***************************   Function to get a random Number   ******************* */
+
   const getRandomNumber = () => {
     let min = 1000;
     let max = 9999;
@@ -40,6 +49,8 @@ export const Login = () => {
   useEffect(() => {
     getRandomNumber();
   }, []);
+
+  /***********************   Function to Fetch Login Credentials ************************ */
   const getLoginApi = async (values) => {
     setIsLoading(true);
     let ApiData = await LoginApiData(values);
@@ -51,7 +62,12 @@ export const Login = () => {
     }
   };
 
+  /***************** function to get a random number in localstorage **************** */
+
   let number = localStorage.getItem("Number");
+
+  /******************* Function to check Weather OTP matches or Not ********************* */
+
   const handleOtpVerify = () => {
     if (OTP == number) {
       navigate("/products");
@@ -131,31 +147,19 @@ export const Login = () => {
 
             <div class="text-center">
               <p>or sign up with:</p>
-              <button
-                type="button "
-                class="btn btn-link btn-floating mx-1 buttons"
-              >
+              <button type="button " class="btn btn-link btn-floating mx-1 ">
                 <i class="fab fa-facebook-f"></i>
               </button>
 
-              <button
-                type="button "
-                class="btn btn-link btn-floating mx-1 buttons"
-              >
+              <button type="button " class="btn btn-link btn-floating mx-1 ">
                 <i class="fab fa-google"></i>
               </button>
 
-              <button
-                type="button "
-                class="btn btn-link btn-floating mx-1 buttons"
-              >
+              <button type="button " class="btn btn-link btn-floating mx-1 ">
                 <i class="fab fa-twitter"></i>
               </button>
 
-              <button
-                type="button "
-                class="btn btn-link btn-floating mx-1 buttons"
-              >
+              <button type="button " class="btn btn-link btn-floating mx-1 ">
                 <i class="fab fa-github"></i>
               </button>
             </div>

@@ -9,13 +9,25 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const { productlist, setproductList, cartlength, setCartLength } =
     useContext(ProductlistContext);
+
+  /************************* function to navigate to home page ************ */
+
   const handleHome = () => {
     navigate("/home");
   };
+
+  /********************* function to navigate to about page**************** */
+
   const handleAbout = () => {
     navigate("/about");
   };
+
+  /********** variable to get number in localstorage*********************** */
+
   const Name = localStorage.getItem("Number");
+
+  /***************function for logout from website************************* */
+
   const handleLogOut = () => {
     swal({
       title: "Are you sure?",
@@ -26,9 +38,8 @@ export const Navbar = () => {
     }).then((willDelete) => {
       if (willDelete) {
         localStorage.clear();
-        toast("Logout Successfully");
+        navigate("/home");
       } else {
-        swal("Your are still Logged In!");
       }
     });
   };
@@ -36,10 +47,22 @@ export const Navbar = () => {
   return (
     <>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand nav-heading ">
-            <srong>E</srong>-Commerce
-          </a>
+        <div class="container-fluid custom_flex">
+          <div className="logo_img">
+            <a class="navbar-brand nav-heading ">
+              <srong>E</srong>-Commerce
+            </a>
+            <span className="cart-icon  show_mobile">
+              <i
+                className="fa fa-shopping-cart cart_hover"
+                aria-hidden="true"
+                onClick={() => {
+                  navigate("/cart");
+                }}
+              ></i>
+              <small className="add_cart"> {cartlength.length}</small>
+            </span>
+          </div>
 
           <ul class="navbar-nav  mb-2 mb-lg-0 ml-auto position-relative">
             <li class="nav-item link_hover">
@@ -63,7 +86,7 @@ export const Navbar = () => {
               </a>
             </li>
             {Name ? (
-              "Hello,User"
+              <div className="hello_navbar">Hello,User</div>
             ) : (
               <>
                 <button
@@ -77,7 +100,7 @@ export const Navbar = () => {
               </>
             )}
 
-            <span className="cart-icon">
+            <span className="cart-icon mobile_hidden">
               <i
                 className="fa fa-shopping-cart cart_hover"
                 aria-hidden="true"

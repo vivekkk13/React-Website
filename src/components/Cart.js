@@ -17,6 +17,9 @@ export const Cart = () => {
     discount: 0,
     total: 0,
   });
+
+  /******************function for deleting a cart item********************************** */
+
   const handleDelete = (list) => {
     swal({
       title: "Are you sure?",
@@ -29,23 +32,32 @@ export const Cart = () => {
         setCartLength(cartlength.filter((data) => data.id != list.id));
         toast("Deleted Successfully");
       } else {
-        swal("Your imaginary file is safe!");
       }
     });
   };
+
+  /****************** function for making cart empty*********************************** */
+
   const handleCartEmpty = () => {
-    swal({
-      title: "Are you sure?",
-      text: "You Want to empty your Cart",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        setCartLength([]);
-      }
-    });
+    if (cartlength.length == 0) {
+      swal("Cart is Already Empty");
+    } else {
+      swal({
+        title: "Are you sure?",
+        text: "You Want to empty your Cart",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          setCartLength([]);
+        }
+      });
+    }
   };
+
+  /********************* function for making cart item quantity less or more******************** */
+
   const handleMinus = (id) => {
     setCartLength((cartlength) =>
       cartlength.map((item) =>
@@ -67,6 +79,8 @@ export const Cart = () => {
       )
     );
   };
+
+  /*********************** function for calculating subtotal discount and total************************** */
   useEffect(() => {
     let dummyData = {
       subTotal: 0,

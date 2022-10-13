@@ -10,13 +10,26 @@ export const Products = () => {
   const { productlist, setproductList, cartlength, setCartLength } =
     useContext(ProductlistContext);
   const [search, setSearch] = useState("");
+  const [newList, setNewList] = useState(productlist);
   const navigate = useNavigate();
+
+  /******************* function for get nubers of items in cart************************* */
   const handleCart = (item) => {
-    setCartLength([...cartlength, item]);
+    if (cartlength.find((list) => list.id == item.id)) {
+      setCartLength(cartlength);
+    } else {
+      setCartLength([...cartlength, item]);
+    }
   };
+
+  /*************** function for search in a product list******************** */
   useEffect(() => {
-    setproductList(productlist.filter((list) => list.name.includes(search)));
-    console.log("productlist ==> ", search);
+    if (search == "") {
+      setproductList(newList);
+      console.log("afsdfsdfs", newList);
+    } else {
+      setproductList(newList.filter((list) => list.name.includes(search)));
+    }
   }, [search]);
 
   return (

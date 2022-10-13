@@ -4,22 +4,34 @@ import { ProductlistContext } from "../App";
 const Sidebar = () => {
   const { productlist, setproductList } = useContext(ProductlistContext);
   const [mobiledata, setMobileData] = useState(productlist);
-  const [active, setActive] = useState("");
+
+  /******************** function to  filter items "MOBILE"******************************* */
 
   const handleSubmit = () => {
     setproductList(mobiledata.filter((list) => list.company === "mobile"));
   };
 
+  /******************** function to  filter items "LAPTOP"******************************* */
+
   const handleSearch = () => {
     setproductList(mobiledata.filter((list) => list.company === "laptop"));
   };
+
+  /******************** function to  filter items "WATCH"******************************* */
+
   const handleWatch = () => {
     setproductList(mobiledata.filter((list) => list.company === "watch"));
   };
+
+  /******************** function to  filter items "COMPUTER"******************************* */
+
   const handleComputer = () => {
     setproductList(mobiledata.filter((list) => list.company === "computer"));
   };
-  const handleFix = () => {
+
+  /******************** function to  filter  ALL items ******************************* */
+
+  const handleFilter = () => {
     setproductList(mobiledata);
   };
 
@@ -42,7 +54,10 @@ const Sidebar = () => {
           <a onClick={handleComputer}>computer</a>
         </li>
 
-        <button className="btn btn-secondary sidebar_btn" onClick={handleFix}>
+        <button
+          className="btn btn-secondary sidebar_btn"
+          onClick={handleFilter}
+        >
           Clear Filters
         </button>
       </div>

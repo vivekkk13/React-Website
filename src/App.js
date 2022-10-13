@@ -23,7 +23,7 @@ function App() {
       name: "iphone-x",
       img: img2,
       price: "10000",
-      discount: "60",
+      discount: "50",
       quantity: 1,
     },
     {
